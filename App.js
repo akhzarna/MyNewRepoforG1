@@ -9,6 +9,16 @@ export default function App() {
       <Text>  In The name of Allah </Text>
       <Text>  In The name of Allah </Text>
       <Text style={{fontSize:32}}>  In The name of Allah </Text>
+      <Text style={{fontSize:32}}>  In The name of Allah </Text>
+      <Text style={{fontSize:32}}>  In The name of Allah </Text>
+      <Text style={{fontSize:32}}>  In The name of Allah </Text>
+      <Text style={{fontSize:32}}>  In The name of Allah </Text>
+      <Text style={{fontSize:32}}>  In The name of Allah </Text>
+      <Text style={{fontSize:32}}>  In The name of Allah </Text>
+      <Text style={{fontSize:32}}>  In The name of Allah </Text>
+      <Text style={{fontSize:32}}>  In The name of Allah </Text>
+      <Text style={{fontSize:32}}>  In The name of Allah </Text>
+      <Text style={{fontSize:32}}>  In The name of Allah </Text>
 
       <StatusBar style="auto" />
     </View>
