@@ -5,6 +5,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={{fontSize:56}}>  Bismillah In The name of Allah The most The Most </Text>
+      <Text style={{fontSize:56}}>  Bismillah In The name of Allah The most The Most </Text>
+
       <StatusBar style="auto" />
     </View>
   );
