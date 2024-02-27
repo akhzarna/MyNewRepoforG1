@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import { StyleSheet, 
   Text, 
   View,
@@ -9,32 +9,23 @@ import { StyleSheet,
   Alert
   } from 'react-native';
 
-export default function Login({navigation}) {
+export default function Settings({navigation}) {
+
 
     const onPress = ()=>{
-        navigation.navigate('Dashboard',{data:"I am Coming from Login Screen"});
+        navigation.navigate('Register',{data:'I am Setting Screen'});
     }
 
-    const [data, setData] = useState();
-    
   return (
     <View style={styles.container}>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-
+        <Text> This is Settings Screen </Text>
+        <Text> This is Settings Screen </Text>
+        <Text> This is Settings Screen </Text>
+        <Text> This is Settings Screen </Text>
+       
     <View style={styles.logo}>
 
-    <Image
-        style={styles.tinyLogo}
-        source={require('./assets/favicon.png')}
-      />
+    
 
 
     </View>
@@ -45,9 +36,11 @@ export default function Login({navigation}) {
 
       <View style={styles.buttons}>
 
-           <TouchableOpacity onPress={onPress}>
-            <Text style={{fontSize:30, color:'white'}}>Go to Next Screen</Text>
-            </TouchableOpacity>
+        <TouchableOpacity onPress={onPress}>
+
+            <Text style={{fontSize:40}}> Go to Next Screen</Text>
+        </TouchableOpacity>
+
         </View>
     </View>
   );

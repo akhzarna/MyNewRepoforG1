@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import { StyleSheet, 
   Text, 
   View,
@@ -9,47 +9,25 @@ import { StyleSheet,
   Alert
   } from 'react-native';
 
-export default function Login({navigation}) {
+export default function Card({item}) {
 
     const onPress = ()=>{
-        navigation.navigate('Dashboard',{data:"I am Coming from Login Screen"});
+        navigation.navigate('Settings');
+        // flag = flag+19;
+        // setMyflag(myflag+19);
     }
-
-    const [data, setData] = useState();
-    
   return (
-    <View style={styles.container}>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-
-    <View style={styles.logo}>
-
-    <Image
-        style={styles.tinyLogo}
-        source={require('./assets/favicon.png')}
-      />
-
-
-    </View>
-
-    <View style={styles.input}>
-
-    </View>
-
-      <View style={styles.buttons}>
-
-           <TouchableOpacity onPress={onPress}>
-            <Text style={{fontSize:30, color:'white'}}>Go to Next Screen</Text>
-            </TouchableOpacity>
-        </View>
-    </View>
+     <TouchableOpacity onPress={onPress}>
+          <View style={{
+            backgroundColor:'white', 
+            alignItems:'center', 
+            justifyContent:'center',
+            marginBottom:10,
+            height:60
+            }}>
+            <Text> {item.title} </Text>
+          </View>
+          </TouchableOpacity>
   );
 }
 

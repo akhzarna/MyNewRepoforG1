@@ -1,55 +1,43 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import { StyleSheet, 
   Text, 
   View,
   Image,
   TextInput,
   TouchableOpacity,
-  Alert
+  Alert,
+  FlatList
   } from 'react-native';
 
-export default function Login({navigation}) {
-
-    const onPress = ()=>{
-        navigation.navigate('Dashboard',{data:"I am Coming from Login Screen"});
-    }
-
-    const [data, setData] = useState();
+export default function CustomFlatList({data}) {
     
+    const onPress = (item) =>{
+        Alert.alert('Click Ho Raha hai' , item.key)
+    }
   return (
-    <View style={styles.container}>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-
-    <View style={styles.logo}>
-
-    <Image
-        style={styles.tinyLogo}
-        source={require('./assets/favicon.png')}
-      />
-
-
-    </View>
-
+    
     <View style={styles.input}>
-
+      <FlatList
+        data={data}
+        keyExtractor={item=>item.key}
+        renderItem={({item})=>(
+        <TouchableOpacity onPress={()=>onPress(item)}>
+            
+            <View style={{
+              backgroundColor:'white', 
+              alignItems:'center', 
+              justifyContent:'center',
+              marginBottom:10,
+              height:60
+              }}>
+              <Text> {item.title} </Text>
+            </View>
+            </TouchableOpacity>        )
+        }
+      />
     </View>
 
-      <View style={styles.buttons}>
-
-           <TouchableOpacity onPress={onPress}>
-            <Text style={{fontSize:30, color:'white'}}>Go to Next Screen</Text>
-            </TouchableOpacity>
-        </View>
-    </View>
   );
 }
 

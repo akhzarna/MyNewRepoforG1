@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import { StyleSheet, 
   Text, 
   View,
@@ -9,10 +9,70 @@ import { StyleSheet,
   Alert
   } from 'react-native';
 
-export default function Home({navigation}) {
+export default function Home({navigation, route}) {
+
+    useLayoutEffect(() => {
+
+		console.log('MessagesScreen',route.params.data);
+		
+        navigation.setOptions({
+			title: 'Hello',
+			headerLeft: () => (
+				<TouchableOpacity
+					style={{ 
+						marginRight: 20, 
+						// backgroundColor: 'blue' 
+						}}
+					onPress={() => navigation.pop()}
+				>
+
+                    <Text> Back Button </Text>
+					{/* <MaterialCommunityIcons
+						name='chevron-left'
+						color={'white'}
+						size={30}
+					/> */}
+				</TouchableOpacity>
+			),
+			headerRight: () => (
+				<View
+					style={{
+						marginRight: 10,
+						alignItems:'center',
+						justifyContent:'center'
+					}}
+				>
+				<TouchableOpacity
+					onPress={() => navigation.pop()}
+					style={{
+						// backgroundColor: 'blue',
+						alignItems:'center',
+						justifyContent:'center'
+					}}
+				>
+
+                    <Text> Right Side </Text>
+					{/* <MaterialCommunityIcons
+						name='android-messages'
+						color={'white'}
+						size={30}
+					/> */}
+
+					{/* <Image style={{width:25, height:25, marginBottom:3}} source={require("../../assets/icons/chat-room-icon.png")} /> */}
+
+					<Text style={{ color: 'white', fontSize: 12, fontWeight: 'bold' }}>
+						Chats
+					</Text>
+				</TouchableOpacity>
+				</View>
+			),
+		});
+	}, [navigation]);
+
 
     const onPress = ()=>{
-        navigation.pop();
+        // navigation.pop();
+        console.log(route.params.data[0]);
     }
 
   return (

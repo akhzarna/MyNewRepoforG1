@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import { StyleSheet, 
   Text, 
   View,
@@ -9,46 +9,12 @@ import { StyleSheet,
   Alert
   } from 'react-native';
 
-export default function Login({navigation}) {
+export default function Top({elements, title}) {
 
-    const onPress = ()=>{
-        navigation.navigate('Dashboard',{data:"I am Coming from Login Screen"});
-    }
-
-    const [data, setData] = useState();
-    
   return (
     <View style={styles.container}>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-
-    <View style={styles.logo}>
-
-    <Image
-        style={styles.tinyLogo}
-        source={require('./assets/favicon.png')}
-      />
-
-
-    </View>
-
-    <View style={styles.input}>
-
-    </View>
-
-      <View style={styles.buttons}>
-
-           <TouchableOpacity onPress={onPress}>
-            <Text style={{fontSize:30, color:'white'}}>Go to Next Screen</Text>
-            </TouchableOpacity>
-        </View>
+        <Text> This is Top Bar and element is = {elements} </Text>
+        <Text> This is Top Bar and title is = {title} </Text>
     </View>
   );
 }

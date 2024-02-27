@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import { StyleSheet, 
   Text, 
   View,
@@ -9,25 +9,53 @@ import { StyleSheet,
   Alert
   } from 'react-native';
 
-export default function Login({navigation}) {
+export default function Dashboard({navigation,route}) {
+
+    useLayoutEffect(() => {
+       
+        navigation.setOptions({
+		    title: 'Class G2',
+
+
+            headerLeft: () => (
+              
+              
+                <TouchableOpacity
+                    style={{ 
+                        marginRight: 20, 
+                        // backgroundColor: 'blue' 
+                        }}
+                    onPress={() => navigation.pop()}
+                >
+
+                    <Text> G2 Back Button </Text>
+                </TouchableOpacity>
+
+
+
+            ),
+
+            
+            
+        });
+
+
+
+	}, [navigation]);
+
 
     const onPress = ()=>{
-        navigation.navigate('Dashboard',{data:"I am Coming from Login Screen"});
+        // navigation.pop();
+        // console.log(route.params.data[0]);
+        
+        console.log('Check If Data has arrived or not');
+        console.log(route.params.data);
+
     }
 
-    const [data, setData] = useState();
-    
   return (
     <View style={styles.container}>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
-        <Text> This is Login Screen </Text>
+    <Text style={{fontSize:40}}> This is Dashboard and data is = {route.params.data} </Text>
 
     <View style={styles.logo}>
 
@@ -44,8 +72,7 @@ export default function Login({navigation}) {
     </View>
 
       <View style={styles.buttons}>
-
-           <TouchableOpacity onPress={onPress}>
+      <TouchableOpacity onPress={onPress}>
             <Text style={{fontSize:30, color:'white'}}>Go to Next Screen</Text>
             </TouchableOpacity>
         </View>
