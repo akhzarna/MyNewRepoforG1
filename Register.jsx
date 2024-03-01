@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState, useLayoutEffect } from 'react';
+import { useState, useLayoutEffect, useEffect } from 'react';
 import { StyleSheet, 
   Text, 
   View,
@@ -11,9 +11,7 @@ import { StyleSheet,
   } from 'react-native';
 
   import Top from './Top';
-
   import Card from './Card';
-  
   import Score from './Score';
 
   import CustomFlatList from './CustomFlatList';
@@ -22,78 +20,76 @@ import { StyleSheet,
 
 export default function Register({navigation, route}) {
   
+  console.log('Top AREA');
+  
+  useLayoutEffect(() => {
+    // console.log('useLayout Effect');
+  // console.log('MessagesScreen',route.params.data);
+    navigation.setOptions({
+    title: 'Hello',
+    headerLeft: () => (
+      <TouchableOpacity
+        style={{ 
+          marginRight: 20, 
+          // backgroundColor: 'blue' 
+          }}
+        onPress={() => navigation.pop()}
+      >
 
-  const [c1, setC1] = useState(15);
+                  <Text> Back Button </Text>
+        
+                  {/* <MaterialCommunityIcons
+          name='chevron-left'
+          color={'white'}
+          size={30}
+        /> */}
+      </TouchableOpacity>
+    ),
+    // headerRight: () => (
+    // 	<View
+    // 		style={{
+    // 			marginRight: 10,
+    // 			alignItems:'center',
+    // 			justifyContent:'center'
+    // 		}}
+    // 	>
+    // 	<TouchableOpacity
+    // 		onPress={() => navigation.pop()}
+    // 		style={{
+    // 			// backgroundColor: 'blue',
+    // 			alignItems:'center',
+    // 			justifyContent:'center'
+    // 		}}
+    // 	>
 
+          //         <Text> Right Side </Text>
+    // 		{/* <MaterialCommunityIcons
+    // 			name='android-messages'
+    // 			color={'white'}
+    // 			size={30}
+    // 		/> */}
 
-  const [abc, setAbc] = useState(34);
+    // 		{/* <Image style={{width:25, height:25, marginBottom:3}} source={require("../../assets/icons/chat-room-icon.png")} /> */}
 
-    useLayoutEffect(() => {
+    // 		<Text style={{ color: 'white', fontSize: 12, fontWeight: 'bold' }}>
+    // 			Chats
+    // 		</Text>
+    // 	</TouchableOpacity>
+    // 	</View>
+    // ),
+  });
+}, [navigation]);
+  
+  
+  const [store, setStore] = useState(12);
+  const [count, setCount] = useState(12);
+  const [score, setScore] = useState(10);
 
-		console.log('MessagesScreen',route.params.data);
-      navigation.setOptions({
-			title: 'Hello',
-			headerLeft: () => (
-        <TouchableOpacity
-					style={{ 
-						marginRight: 20, 
-						// backgroundColor: 'blue' 
-						}}
-					onPress={() => navigation.pop()}
-				>
-
-                    <Text> Back Button </Text>
-					
-                    {/* <MaterialCommunityIcons
-						name='chevron-left'
-						color={'white'}
-						size={30}
-					/> */}
-				</TouchableOpacity>
-			),
-			// headerRight: () => (
-			// 	<View
-			// 		style={{
-			// 			marginRight: 10,
-			// 			alignItems:'center',
-			// 			justifyContent:'center'
-			// 		}}
-			// 	>
-			// 	<TouchableOpacity
-			// 		onPress={() => navigation.pop()}
-			// 		style={{
-			// 			// backgroundColor: 'blue',
-			// 			alignItems:'center',
-			// 			justifyContent:'center'
-			// 		}}
-			// 	>
-
-            //         <Text> Right Side </Text>
-			// 		{/* <MaterialCommunityIcons
-			// 			name='android-messages'
-			// 			color={'white'}
-			// 			size={30}
-			// 		/> */}
-
-			// 		{/* <Image style={{width:25, height:25, marginBottom:3}} source={require("../../assets/icons/chat-room-icon.png")} /> */}
-
-			// 		<Text style={{ color: 'white', fontSize: 12, fontWeight: 'bold' }}>
-			// 			Chats
-			// 		</Text>
-			// 	</TouchableOpacity>
-			// 	</View>
-			// ),
-		});
-	}, [navigation]);
-    
     const onPress = ()=>{
-        c=c+100;
-        setC1(c1+100);
-        console.log('Value of C is =',c);
+      setCount(count+2);
+      setStore(store+2);
+      setScore(score+12);
     }
-
-    const [myflag, setMyflag] = useState(234);
-
    
     const myData = [
       {key:'0', title:'Lahore'},
@@ -101,20 +97,40 @@ export default function Register({navigation, route}) {
       {key:'2', title:'Islamabad'},
     ];
 
+  // Funtion Overriding
+
+  useEffect(()=>{
+    console.log('useEffect');
+  })
+
+  useEffect(()=>{
+    console.log('useEffect []');
+    // Fetch Data From CricInfo
+    // setScore(score+12);
+  },[])
+
+  // useEffect(()=>{
+  //   console.log('useEffect [store]');
+  // },[store])
+
+  // useEffect(()=>{
+  //   console.log('useEffect [count]');
+  // },[count])
+
+  // useEffect(()=>{
+  //   console.log('useEffect [count, store]');
+  // },[count, store])
+
   return (
+    
     <View style={styles.container}>
-
+    
+      {console.log('return')}
+    
       <Text style={{fontSize:40}}> 
-      We are testing C Variable Value = {c}
+       Score is = {score}
       </Text>
-
-      <Text style={{fontSize:40}}> 
-      We are testing C1 Variable Value = {c1}
-      </Text>
-
-
     <CustomFlatList data={myData}/>
-
       <View style={styles.buttons}>
         <TouchableOpacity onPress={onPress}>
           <Text style={{fontSize:40}}> Update </Text>
