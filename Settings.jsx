@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState, useLayoutEffect } from 'react';
+import { useState, useLayoutEffect, useEffect } from 'react';
 import { StyleSheet, 
   Text, 
   View,
@@ -9,19 +9,42 @@ import { StyleSheet,
   Alert
   } from 'react-native';
 
+  global.font=12;
 export default function Settings({navigation}) {
 
-
+    const[myfont, setMyfont] = useState(12);
+   
     const onPress = ()=>{
-        navigation.navigate('Register',{data:'I am Setting Screen'});
+        // navigation.navigate('Register',{data:'I am Setting Screen'});
+
+        // global.font = myfont;
+        // global.font=global.font+10;
+
+        global.font=global.font+2;
+        console.log(global.font);
+        setMyfont(myfont+80);
+
     }
+  
+  // useEffect(()=>{
+
+  //   global.flag=10;
+  //   const unsubscribe = navigation.addListener('focus', ()=>{
+  //     console.log('Navigation useEffect is Called')
+  //   })
+  //   return unsubscribe;
+  // },[navigation])
+
+  useEffect(()=>{
+    return()=>{
+      console.log('Going Back');
+      // Alert.alert('You wanna go back');
+    }
+  },[])
 
   return (
     <View style={styles.container}>
-        <Text> This is Settings Screen </Text>
-        <Text> This is Settings Screen </Text>
-        <Text> This is Settings Screen </Text>
-        <Text> This is Settings Screen </Text>
+        <Text style={{fontSize:global.font}}> This is Settings Screen {global.font} </Text>
        
     <View style={styles.logo}>
 

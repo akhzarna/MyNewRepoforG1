@@ -1,4 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar, setStatusBarBackgroundColor } from 'expo-status-bar';
 import { useState, useLayoutEffect, useEffect } from 'react';
 import { StyleSheet, 
   Text, 
@@ -21,12 +21,14 @@ import { StyleSheet,
 export default function Register({navigation, route}) {
   
   console.log('Top AREA');
-  
+
+  console.log(global.font)
+
   useLayoutEffect(() => {
     // console.log('useLayout Effect');
   // console.log('MessagesScreen',route.params.data);
     navigation.setOptions({
-    title: 'Hello',
+    title: 'Register Screen',
     headerLeft: () => (
       <TouchableOpacity
         style={{ 
@@ -85,10 +87,15 @@ export default function Register({navigation, route}) {
   const [count, setCount] = useState(12);
   const [score, setScore] = useState(10);
 
+  const [font, setFont] = useState(16);
+
+  console.log(global.font)
+
     const onPress = ()=>{
-      setCount(count+2);
-      setStore(store+2);
-      setScore(score+12);
+      // setCount(count+2);
+      // setStore(store+2);
+      // setScore(score+12);
+      navigation.navigate('Settings');
     }
    
     const myData = [
@@ -97,16 +104,30 @@ export default function Register({navigation, route}) {
       {key:'2', title:'Islamabad'},
     ];
 
-  // Funtion Overriding
+  useEffect(()=>{
+    
+    const unsubscribe = navigation.addListener('focus', ()=>{
+      console.log('We are Back')
+      // console.log(global.font);
+      // setCount(global.font);
+    })
+
+
+    return unsubscribe;
+  },[navigation])
 
   useEffect(()=>{
     console.log('useEffect');
+
+    console.log(global.font)
+
   })
 
   useEffect(()=>{
     console.log('useEffect []');
     // Fetch Data From CricInfo
     // setScore(score+12);
+
   },[])
 
   // useEffect(()=>{
@@ -127,13 +148,13 @@ export default function Register({navigation, route}) {
     
       {console.log('return')}
     
-      <Text style={{fontSize:40}}> 
-       Score is = {score}
+      <Text style={{fontSize:global.font}}> 
+       Font is = {global.font}
       </Text>
     <CustomFlatList data={myData}/>
       <View style={styles.buttons}>
         <TouchableOpacity onPress={onPress}>
-          <Text style={{fontSize:40}}> Update </Text>
+          <Text style={{fontSize:40}}> Settings </Text>
         </TouchableOpacity>
 
       </View>
