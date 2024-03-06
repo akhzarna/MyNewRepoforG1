@@ -7,7 +7,8 @@ import { StyleSheet,
   TextInput,
   TouchableOpacity,
   Alert,
-  FlatList
+  FlatList,
+  SectionList
   } from 'react-native';
 
   import Top from './Top';
@@ -82,7 +83,6 @@ export default function Register({navigation, route}) {
   });
 }, [navigation]);
   
-  
   const [store, setStore] = useState(12);
   const [count, setCount] = useState(12);
   const [score, setScore] = useState(10);
@@ -97,11 +97,22 @@ export default function Register({navigation, route}) {
       // setScore(score+12);
       navigation.navigate('Settings');
     }
-   
-    const myData = [
-      {key:'0', title:'Lahore'},
-      {key:'1', title:'Karachi'},
-      {key:'2', title:'Islamabad'},
+    
+    const onItemClick = (item) =>{
+      console.log('Item is =', item);
+    }
+
+    const data = [
+      {key:0, title:'Rizwan', msg:'Hello how are you', time:'11:52', unread:'4'},
+      {key:1, title:'Ali', msg:'Hello how are you', time:'11:52', unread:'4'},
+      {key:2, title:'Areeb', msg:'Hello how are you', time:'11:52', unread:'4'},
+
+    ];
+
+    const sectionData = [
+      {key:'0', title:'Pakistan', data:[{key:0, title:'Lahore'},{key:1, title:'Karachi'}]},
+      {key:'1', title:'Afghanistan', data:[{key:0, title:'Kabul'},{key:1, title:'Kandhar'},{key:2, title:'Ningarhaar'}]},
+      {key:'2', title:'Iran', data:[{key:0, title:'Tehran'}]},
     ];
 
   useEffect(()=>{
@@ -151,13 +162,73 @@ export default function Register({navigation, route}) {
       <Text style={{fontSize:global.font}}> 
        Font is = {global.font}
       </Text>
-    <CustomFlatList data={myData}/>
+    {/* <CustomFlatList data={myData}/> */}
+
+    <FlatList
+        data={data}
+        keyExtractor={item=>item.key}
+        renderItem={({item})=>(
+                    
+            <View style={{
+              backgroundColor:'white', 
+              // alignItems:'center', 
+              // justifyContent:'center',
+              marginBottom:10,
+              height:60, 
+              flex:1,
+              flexDirection:'row'
+              }}>
+              
+              <View style={{flex:0.50, backgroundColor:'grey'}}>
+
+              <Text style={{color:'white'}}> {item.title} </Text>
+              <Text style={{color:'white'}}> {item.msg} </Text>
+
+              </View>
+              <View style={{flex:0.50, backgroundColor:'green', alignItems:'flex-end'}}>
+
+              <Text style={{color:'white'}}> {item.time} </Text>
+              <Text style={{color:'white'}}> {item.unread} </Text>
+              </View>
+
+
+             
+
+            </View>
+            
+            
+            )
+        }
+      />
+    
+    {/* <SectionList
+          sections={sectionData}
+          keyExtractor={item=>item.key}
+          renderSectionHeader={({ section: { title } }) => (
+            <View style={{backgroundColor:'grey'}}>
+            <Text>{title}</Text>
+            </View>
+          )}
+          renderItem={({item}) => (
+            <View style={{backgroundColor:'green', height:40, marginBottom:10, flex:1, flexDirection:'row'}}>
+            <View style={{ flex:'50%'}}>
+            <Text style={{color:'white'}}> {item.title} </Text>
+            <Text style={{color:'white'}}> {item.class} </Text>
+            </View>
+            <View style={{flex:'50%', alignItems: 'right',justifyContent: 'right',}}>
+            <Text style={{color:'white'}}> {item.time} </Text>
+            </View>
+            </View>
+          )}
+        /> */}
+
+
       <View style={styles.buttons}>
         <TouchableOpacity onPress={onPress}>
           <Text style={{fontSize:40}}> Settings </Text>
         </TouchableOpacity>
-
       </View>
+      
     </View>
   );
 }
