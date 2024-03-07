@@ -95,7 +95,7 @@ export default function Register({navigation, route}) {
       // setCount(count+2);
       // setStore(store+2);
       // setScore(score+12);
-      navigation.navigate('Settings');
+      navigation.navigate('Home');
     }
     
     const onItemClick = (item) =>{

@@ -7,7 +7,7 @@ const Stack = createStackNavigator();
 // import Dashboard from "./Dashboard";
 
 import Register from "./Register";
-import Settings from "./Settings";
+import Home from "./Home";
 
 export default function App() {
 
@@ -15,7 +15,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: true }}>
       <Stack.Screen name="Register" component={Register} />
-      <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
   );

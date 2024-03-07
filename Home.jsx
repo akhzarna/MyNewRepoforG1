@@ -6,11 +6,15 @@ import { StyleSheet,
   Image,
   TextInput,
   TouchableOpacity,
-  Alert
+  Alert,
+  FlatList
   } from 'react-native';
 
+  import axios from 'axios';
+
   global.font=12;
-export default function Settings({navigation}) {
+
+export default function Home({navigation}) {
 
     const[myfont, setMyfont] = useState(12);
    
@@ -35,36 +39,79 @@ export default function Settings({navigation}) {
   //   return unsubscribe;
   // },[navigation])
 
-  useEffect(()=>{
-    return()=>{
-      console.log('Going Back');
-      // Alert.alert('You wanna go back');
+  // useEffect(()=>{
+  //   return()=>{
+  //     console.log('Going Back');
+  //     // Alert.alert('You wanna go back');
+  //   }
+  // },[])
+
+
+  const[data, setData] = useState();
+  
+  // const mydata = [{"id": "1", "releaseYear": "1977", "title": "Star Wars"}, {"id": "2", "releaseYear": "1985", "title": "Back to the Future"}, {"id": "3", "releaseYear": "1999", "title": "The Matrix"}, {"id": "4", "releaseYear": "2010", "title": "Inception"}, {"id": "5", "releaseYear": "2014", "title": "Interstellar"}]
+
+  const getMovies = async () => {
+    try {
+      const response = await fetch('https://reactnative.dev/movies.json');
+      const json = await response.json();
+      console.log(json);
+      setData(json.movies);
+      console.log(json.movies);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      // setLoading(false);
     }
-  },[])
+  };
+
+  useEffect(() => {
+    // getMovies();
+    const url = 'https://reactnative.dev/movies.json';
+    axios.get(url).then((response)=>{
+      console.log(response.data.movies);
+      setData(response.data.movies);
+    })
+  }, []);
 
   return (
     <View style={styles.container}>
-        <Text style={{fontSize:global.font}}> This is Settings Screen {global.font} </Text>
+        <Text style={{fontSize:global.font}}> This is Home Screen {global.font} </Text>
        
     <View style={styles.logo}>
 
-    
+    <FlatList
+        data={data}
+        keyExtractor={item=>item.id}
+        renderItem={({item})=>(
+          
+            <View style={{
+              backgroundColor:'white', 
+              marginBottom:10,
+              height:60, 
+              flex:1,
+              justifyContent:'center',
+              alignItems: 'center',
+              }}>
+              
+                <Text style={{color:'black'}}> {item.title} </Text>
+                <Text style={{color:'grey'}}> {item.releaseYear} </Text>
 
-
+            </View>
+            
+            )
+        }
+      />
     </View>
 
     <View style={styles.input}>
-
     </View>
 
       <View style={styles.buttons}>
-
         <TouchableOpacity onPress={onPress}>
-
             <Text style={{fontSize:40}}> Go to Next Screen</Text>
         </TouchableOpacity>
-
-        </View>
+      </View>
     </View>
   );
 }
@@ -79,8 +126,8 @@ const styles = StyleSheet.create({
   logo:{
     // backgroundColor:'red',
     flex:0.25,
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
   input:{
     // backgroundColor:'green',
