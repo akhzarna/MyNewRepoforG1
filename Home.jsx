@@ -14,6 +14,8 @@ import { StyleSheet,
 
   global.font=12;
 
+  import AsyncStorage from "@react-native-async-storage/async-storage";
+
 export default function Home({navigation}) {
 
     const[myfont, setMyfont] = useState(12);
@@ -55,9 +57,10 @@ export default function Home({navigation}) {
     try {
       const response = await fetch('https://reactnative.dev/movies.json');
       const json = await response.json();
-      console.log(json);
+      console.log('Kia ham yahaan hain ?');
+      console.log(json.movies[5]);
       setData(json.movies);
-      console.log(json.movies);
+      // console.log(json.movies);
     } catch (error) {
       console.error(error);
     } finally {
@@ -65,11 +68,40 @@ export default function Home({navigation}) {
     }
   };
 
+  const posAPITesting = async () => {
+    const url = 'https://chatgptprompt-flask-app-3e93bb6fd690.herokuapp.com/user/signup';
+    const params = {
+      email:'groupg1@gmail.com',
+      password:'1234567890',
+      display_name:'ABC',
+    }
+    const headers = {
+      'Content-Type':'application/json'
+    }
+    axios.post(url,params,{
+      headers:headers
+    }).then(res=>{
+      console.log('Success', res.data)
+    }).catch(err=>{
+      console.log('Error',err)
+    })
+  }
+
   useEffect(() => {
+
+    const movies=[{id:1, name:'Hello'},{id:1, name:'Hello'}]
+    AsyncStorage.setItem('moviesdata',JSON.stringify(movies))
+    
+    AsyncStorage.getItem('moviesdata').then((data)=>{
+      let originalform=JSON.parse(data);
+      console.log(data);
+      console.log(data[0]);
+    })
     // getMovies();
-    const url = 'https://reactnative.dev/movies.json';
-    axios.get(url).then((response)=>{
-      console.log(response.data.movies);
+    // posAPITesting();
+    // const url = 'https://reactnative.dev/movies.json';
+    axios.get('https://reactnative.dev/movies.json').then((response)=>{
+      console.log(response.data.movies[0]);
       setData(response.data.movies);
     })
   }, []);
@@ -89,11 +121,11 @@ export default function Home({navigation}) {
               backgroundColor:'white', 
               marginBottom:10,
               height:60, 
-              flex:1,
               justifyContent:'center',
               alignItems: 'center',
               }}>
               
+                 <Text style={{color:'black'}}> {item.id} </Text>
                 <Text style={{color:'black'}}> {item.title} </Text>
                 <Text style={{color:'grey'}}> {item.releaseYear} </Text>
 
@@ -125,7 +157,7 @@ const styles = StyleSheet.create({
   },
   logo:{
     // backgroundColor:'red',
-    flex:0.25,
+    // flex:0.25,
     // alignItems: 'center',
     // justifyContent: 'center',
   },
