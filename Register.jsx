@@ -19,8 +19,12 @@ import { StyleSheet,
 
   var c = 15;
 
+  import APIHook from './APIHook';
+
 export default function Register({navigation, route}) {
-  
+
+  const {mydata} = APIHook('https://reactnative.dev/movies.json')
+
   console.log('Top AREA');
 
   console.log(global.font)

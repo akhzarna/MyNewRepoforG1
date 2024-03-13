@@ -16,10 +16,19 @@ import { StyleSheet,
 
   import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function Home({navigation}) {
+  import CustomHook from './CustomHook';
 
+  import GETAPICustomHook from './GETAPICustomHook';
+
+  import APIHook from './APIHook';
+
+export default function Home({navigation}) {
+    const {mydata} = APIHook('https://reactnative.dev/movies.json')
+    
+    // const {mydata} = GETAPICustomHook()
+    // const {dataClone, getMoviesClone} = CustomHook('https://reactnative.dev/movies.json');
     const[myfont, setMyfont] = useState(12);
-   
+
     const onPress = ()=>{
         // navigation.navigate('Register',{data:'I am Setting Screen'});
 
@@ -31,7 +40,10 @@ export default function Home({navigation}) {
         setMyfont(myfont+80);
 
     }
-  
+    
+    useEffect(()=>{
+      // getMoviesClone();
+    })
   // useEffect(()=>{
 
   //   global.flag=10;
@@ -94,26 +106,29 @@ export default function Home({navigation}) {
     
     AsyncStorage.getItem('moviesdata').then((data)=>{
       let originalform=JSON.parse(data);
-      console.log(data);
-      console.log(data[0]);
+      console.log('Data Fetch From Local DB',originalform);
+      console.log('Data Fetch From Local DB [0]',originalform[0]);
+      // console.log(data[0]);
     })
+
     // getMovies();
     // posAPITesting();
     // const url = 'https://reactnative.dev/movies.json';
-    axios.get('https://reactnative.dev/movies.json').then((response)=>{
-      console.log(response.data.movies[0]);
-      setData(response.data.movies);
-    })
+    
+    // axios.get('https://reactnative.dev/movies.json').then((response)=>{
+    //   console.log(response.data.movies[0]);
+    //   setData(response.data.movies);
+    // })
+
   }, []);
 
   return (
     <View style={styles.container}>
         <Text style={{fontSize:global.font}}> This is Home Screen {global.font} </Text>
-       
     <View style={styles.logo}>
 
     <FlatList
-        data={data}
+        data={mydata}
         keyExtractor={item=>item.id}
         renderItem={({item})=>(
           
