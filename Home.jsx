@@ -21,10 +21,16 @@ import { StyleSheet,
   import GETAPICustomHook from './GETAPICustomHook';
 
   import APIHook from './APIHook';
+import POSTAPIHook from './POSTAPIHook';
+
+  const GLOBAL = require("./Globals");
 
 export default function Home({navigation}) {
-    const {mydata} = APIHook('https://reactnative.dev/movies.json')
-    
+  
+  let getmoviesurl = GLOBAL.MovieBase_URL+'movies.json';
+  const {mydata} = APIHook(getmoviesurl);
+  // const {login} = POSTAPIHook();
+ 
     // const {mydata} = GETAPICustomHook()
     // const {dataClone, getMoviesClone} = CustomHook('https://reactnative.dev/movies.json');
     const[myfont, setMyfont] = useState(12);
@@ -41,9 +47,7 @@ export default function Home({navigation}) {
 
     }
     
-    useEffect(()=>{
-      // getMoviesClone();
-    })
+  
   // useEffect(()=>{
 
   //   global.flag=10;
@@ -80,39 +84,98 @@ export default function Home({navigation}) {
     }
   };
 
-  const posAPITesting = async () => {
-    const url = 'https://chatgptprompt-flask-app-3e93bb6fd690.herokuapp.com/user/signup';
-    const params = {
-      email:'groupg1@gmail.com',
-      password:'1234567890',
-      display_name:'ABC',
-    }
-    const headers = {
-      'Content-Type':'application/json'
-    }
-    axios.post(url,params,{
-      headers:headers
-    }).then(res=>{
-      console.log('Success', res.data)
-    }).catch(err=>{
-      console.log('Error',err)
-    })
+  const postAPITesting = async () => {
+    // console.log('posAPITesting');
+    
+    // const signInurl = 'https://dev.iqrakitab.net/api/login';
+    // const signInParams = {
+    //   email:"testakhn@gmail.com",
+    //   password:"12345678"
+    //   }
+
+    // const headers = {
+    //   'Content-Type':'application/json'
+    //   }
+    // axios.post(url,params,{
+    //   headers:headers
+    // }).then(res=>{
+    //   console.log('Success', res.data)
+    // }).catch(err=>{
+    //   console.log('Error',err)
+    // })
+    
+    // Sign Up Post API
+
+   
+
+    
+    // Sign In Post API
+    // axios
+    //   .post(signInurl, signInParams, {
+    //     headers: {
+    //       Accept: "application/json",
+    //       // Authorization: global.userData?.token ? global.userData.token : "",
+    //     },
+    //   })
+    //   .then(function (response) {
+    //     console.log("response.data==", response.data);
+    //     // setreqStatus(response.data.status);
+    //     // setResponse(response);
+    //     // setLoading(false);
+    //   })
+    //   .catch(function (error) {
+    //     console.log('What is error == ',error);
+    //     // Alert.alert('Error')
+    //   })
+
+
   }
 
   useEffect(() => {
 
-    const movies=[{id:1, name:'Hello'},{id:1, name:'Hello'}]
-    AsyncStorage.setItem('moviesdata',JSON.stringify(movies))
     
-    AsyncStorage.getItem('moviesdata').then((data)=>{
-      let originalform=JSON.parse(data);
-      console.log('Data Fetch From Local DB',originalform);
-      console.log('Data Fetch From Local DB [0]',originalform[0]);
-      // console.log(data[0]);
-    })
+      // Login API
+
+      let finalURL = GLOBAL.BASE_URL+'signin';
+      
+      const signUpParams = {
+        "email":"junaid@gmail.com",
+        "password":"12345678"    
+      }
+    
+
+      axios
+      .post(finalURL, signUpParams, {
+        headers: {
+          Accept: "application/json",
+        },
+      })
+      .then(function (response) {
+
+        console.log("We are Successful ==", response.data);
+        // Alert.alert('USer Created Successfully');
+
+      })
+      .catch(function (error) {
+        console.log('What is error == ',error.response.data.message);
+        Alert.alert(error.response.data.message);
+      })
+
+    // console.log('We are checking Global Values',GLOBAL.BASE_URL);
+    
+    // const movies=[{id:1, name:'Hello'},{id:1, name:'Hello'}]
+    // AsyncStorage.setItem('moviesdata',JSON.stringify(movies))
+    
+    // AsyncStorage.getItem('moviesdata').then((data)=>{
+    //   let originalform=JSON.parse(data);
+    //   console.log('Data Fetch From Local DB',originalform);
+    //   console.log('Data Fetch From Local DB [0]',originalform[0]);
+    //   // console.log(data[0]);
+    // })
 
     // getMovies();
-    // posAPITesting();
+    // postAPITesting();
+
     // const url = 'https://reactnative.dev/movies.json';
     
     // axios.get('https://reactnative.dev/movies.json').then((response)=>{

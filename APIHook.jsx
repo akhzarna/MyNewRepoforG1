@@ -10,7 +10,7 @@ export default function APIHook(url){
 
     useEffect(() => {
         axios.get(url).then((response)=>{
-          console.log('GETAPICustomHook',response.data.movies[0]);
+          // console.log('GETAPICustomHook',response.data.movies[0]);
         setMydata(response.data.movies);
         })
       }, []);
