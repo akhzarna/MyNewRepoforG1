@@ -153,7 +153,7 @@ export default function Register({navigation, route}) {
   // },[count, store])
 
   const onPressRegister = async ()=>{
-    await createUserWithEmailAndPassword(auth, 'akhzar@gmail.com', '123456')
+    await createUserWithEmailAndPassword(auth, 'uzair@gmail.com', '123456')
     .then((userCredential) => {
       console.log("Succesfull",userCredential);
       navigation.navigate('Home');
@@ -171,7 +171,7 @@ export default function Register({navigation, route}) {
        await signInWithEmailAndPassword(auth, 'akhzar@gmail.com', '123456')
       .then((userCredential) => {
         // Signed in
-        console.log("user data,", userCredential.user.uid);
+        console.log("user data,", userCredential.user);
         const user = userCredential.user;
         // console.log("user data,", user.uid);
         // console.log("stsTokenManager", user.stsTokenManager.accessToken);
@@ -192,7 +192,7 @@ export default function Register({navigation, route}) {
     
     await signInAnonymously(auth).then((userCredential)=>{
       // console.log('Done',userCredential.user.stsTokenManager.accessToken)
-      console.log(userCredential.user.stsTokenManager.accessToken);
+      console.log(userCredential.user);
       navigation.navigate('Home');
     })
   }

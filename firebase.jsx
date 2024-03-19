@@ -4,13 +4,13 @@ import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
 
-    apiKey: "AIzaSyBCaVGvFNYtBssp5EoMtEY2eYUiA7XNbbg",
-  authDomain: "areeb-e15f4.firebaseapp.com",
-  projectId: "areeb-e15f4",
-  storageBucket: "areeb-e15f4.appspot.com",
-  messagingSenderId: "215965878673",
-  appId: "1:215965878673:web:491574957bc8e6be1d3230",
-  measurementId: "G-355Z7BL2NE"
+    apiKey: "AIzaSyAdaZ4lXurV3zGRYn8AB9PEEarwn8ht7_8",
+    authDomain: "csg1-d8421.firebaseapp.com",
+    projectId: "csg1-d8421",
+    storageBucket: "csg1-d8421.appspot.com",
+    messagingSenderId: "881558113515",
+    appId: "1:881558113515:web:4e65deb9bb527854a3c2ae",
+    measurementId: "G-GZV2HS8YKK"
 
 //   apiKey: "AIzaSyC-OsP9d8bG9nilKstG_oA2Ap0WOdW1MwA",
 //   authDomain: "testproject-827a4.firebaseapp.com",
