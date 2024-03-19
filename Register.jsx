@@ -21,9 +21,12 @@ import { StyleSheet,
 
   import APIHook from './APIHook';
 
+import {auth} from "./firebase";
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword, signInAnonymously, onAuthStateChanged } from "firebase/auth";
+
 export default function Register({navigation, route}) {
 
-  const {mydata} = APIHook('https://reactnative.dev/movies.json')
+  // const {mydata} = APIHook('https://reactnative.dev/movies.json')
 
   console.log('Top AREA');
 
@@ -94,13 +97,6 @@ export default function Register({navigation, route}) {
   const [font, setFont] = useState(16);
 
   console.log(global.font)
-
-    const onPress = ()=>{
-      // setCount(count+2);
-      // setStore(store+2);
-      // setScore(score+12);
-      navigation.navigate('Home');
-    }
     
     const onItemClick = (item) =>{
       console.log('Item is =', item);
@@ -110,7 +106,6 @@ export default function Register({navigation, route}) {
       {key:0, title:'Rizwan', msg:'Hello how are you', time:'11:52', unread:'4'},
       {key:1, title:'Ali', msg:'Hello how are you', time:'11:52', unread:'4'},
       {key:2, title:'Areeb', msg:'Hello how are you', time:'11:52', unread:'4'},
-
     ];
 
     const sectionData = [
@@ -157,6 +152,51 @@ export default function Register({navigation, route}) {
   //   console.log('useEffect [count, store]');
   // },[count, store])
 
+  const onPressRegister = async ()=>{
+    await createUserWithEmailAndPassword(auth, 'akhzar@gmail.com', '123456')
+    .then((userCredential) => {
+      console.log("Succesfull",userCredential);
+      navigation.navigate('Home');
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log('Error Code == ',errorCode)
+      console.log('Error Message == ',errorMessage)
+      // ..
+    });
+  }
+
+  const onPressLogin = async ()=>{
+       await signInWithEmailAndPassword(auth, 'akhzar@gmail.com', '123456')
+      .then((userCredential) => {
+        // Signed in
+        console.log("user data,", userCredential.user.uid);
+        const user = userCredential.user;
+        // console.log("user data,", user.uid);
+        // console.log("stsTokenManager", user.stsTokenManager.accessToken);
+
+        // ...
+        // AsyncStorage.setItem("myuser", JSON.stringify(user));
+        navigation.navigate('Home');
+        })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log("My Error,", errorMessage);
+        // ..
+      });
+  }
+
+  const onPressAnonymous = async ()=>{
+    
+    await signInAnonymously(auth).then((userCredential)=>{
+      // console.log('Done',userCredential.user.stsTokenManager.accessToken)
+      console.log(userCredential.user.stsTokenManager.accessToken);
+      navigation.navigate('Home');
+    })
+  }
+
   return (
     
     <View style={styles.container}>
@@ -164,7 +204,7 @@ export default function Register({navigation, route}) {
       {console.log('return')}
     
       <Text style={{fontSize:global.font}}> 
-       Font is = {global.font}
+       Font is double = {global.font}
       </Text>
     {/* <CustomFlatList data={myData}/> */}
 
@@ -228,9 +268,18 @@ export default function Register({navigation, route}) {
 
 
       <View style={styles.buttons}>
-        <TouchableOpacity onPress={onPress}>
-          <Text style={{fontSize:40}}> Settings </Text>
+        <TouchableOpacity onPress={onPressRegister}>
+          <Text style={{fontSize:40, color:'white'}}> Register </Text>
         </TouchableOpacity>
+
+        <TouchableOpacity onPress={onPressLogin}>
+          <Text style={{fontSize:40, color:'white'}}> Login </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={onPressAnonymous}>
+          <Text style={{fontSize:40, color:'white'}}> Anonymous </Text>
+        </TouchableOpacity>
+
       </View>
       
     </View>
@@ -254,7 +303,7 @@ const styles = StyleSheet.create({
   },
   buttons:{
     backgroundColor:'blue',
-    flex:0.25,
+    flex:0.40,
     alignItems: 'center',
     justifyContent: 'center',
   },

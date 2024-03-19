@@ -21,14 +21,14 @@ import { StyleSheet,
   import GETAPICustomHook from './GETAPICustomHook';
 
   import APIHook from './APIHook';
-import POSTAPIHook from './POSTAPIHook';
+  import POSTAPIHook from './POSTAPIHook';
 
   const GLOBAL = require("./Globals");
 
 export default function Home({navigation}) {
   
-  let getmoviesurl = GLOBAL.MovieBase_URL+'movies.json';
-  const {mydata} = APIHook(getmoviesurl);
+  // let getmoviesurl = GLOBAL.MovieBase_URL+'movies.json';
+  // const {mydata} = APIHook(getmoviesurl);
   // const {login} = POSTAPIHook();
  
     // const {mydata} = GETAPICustomHook()
@@ -65,9 +65,9 @@ export default function Home({navigation}) {
   // },[])
 
 
-  const[data, setData] = useState();
+  // const[data, setData] = useState();
   
-  // const mydata = [{"id": "1", "releaseYear": "1977", "title": "Star Wars"}, {"id": "2", "releaseYear": "1985", "title": "Back to the Future"}, {"id": "3", "releaseYear": "1999", "title": "The Matrix"}, {"id": "4", "releaseYear": "2010", "title": "Inception"}, {"id": "5", "releaseYear": "2014", "title": "Interstellar"}]
+  const data = [{"id": "1", "releaseYear": "1977", "title": "Star Wars"}, {"id": "2", "releaseYear": "1985", "title": "Back to the Future"}, {"id": "3", "releaseYear": "1999", "title": "The Matrix"}, {"id": "4", "releaseYear": "2010", "title": "Inception"}, {"id": "5", "releaseYear": "2014", "title": "Interstellar"}]
 
   const getMovies = async () => {
     try {
@@ -136,30 +136,30 @@ export default function Home({navigation}) {
     
       // Login API
 
-      let finalURL = GLOBAL.BASE_URL+'signin';
+      // let finalURL = GLOBAL.BASE_URL+'signin';
       
-      const signUpParams = {
-        "email":"junaid@gmail.com",
-        "password":"12345678"    
-      }
+      // const signUpParams = {
+      //   "email":"junaid@gmail.com",
+      //   "password":"12345678"    
+      // }
     
 
-      axios
-      .post(finalURL, signUpParams, {
-        headers: {
-          Accept: "application/json",
-        },
-      })
-      .then(function (response) {
+      // axios
+      // .post(finalURL, signUpParams, {
+      //   headers: {
+      //     Accept: "application/json",
+      //   },
+      // })
+      // .then(function (response) {
 
-        console.log("We are Successful ==", response.data);
-        // Alert.alert('USer Created Successfully');
+      //   console.log("We are Successful ==", response.data);
+      //   // Alert.alert('USer Created Successfully');
 
-      })
-      .catch(function (error) {
-        console.log('What is error == ',error.response.data.message);
-        Alert.alert(error.response.data.message);
-      })
+      // })
+      // .catch(function (error) {
+      //   console.log('What is error == ',error.response.data.message);
+      //   Alert.alert(error.response.data.message);
+      // })
 
     // console.log('We are checking Global Values',GLOBAL.BASE_URL);
     
@@ -191,7 +191,7 @@ export default function Home({navigation}) {
     <View style={styles.logo}>
 
     <FlatList
-        data={mydata}
+        data={data}
         keyExtractor={item=>item.id}
         renderItem={({item})=>(
           
