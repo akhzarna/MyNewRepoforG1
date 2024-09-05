@@ -43,6 +43,12 @@ export default function App() {
         In the name of Allah
         
       </Text>
+      
+
+      <Text>
+        In the name of Allah
+        
+      </Text>
 
       <Text>
         In the name of Allah
