@@ -24,6 +24,11 @@ import { StyleSheet,
 import {auth} from "./firebase";
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword, signInAnonymously, onAuthStateChanged } from "firebase/auth";
 
+
+import {getDatabase, ref, onValue} from 'firebase/database';
+import {app} from "./firebase";
+
+
 export default function Register({navigation, route}) {
 
   // const {mydata} = APIHook('https://reactnative.dev/movies.json')
@@ -96,17 +101,19 @@ export default function Register({navigation, route}) {
 
   const [font, setFont] = useState(16);
 
+  const [data, setData] = useState();
+
   console.log(global.font)
     
     const onItemClick = (item) =>{
       console.log('Item is =', item);
     }
 
-    const data = [
-      {key:0, title:'Rizwan', msg:'Hello how are you', time:'11:52', unread:'4'},
-      {key:1, title:'Ali', msg:'Hello how are you', time:'11:52', unread:'4'},
-      {key:2, title:'Areeb', msg:'Hello how are you', time:'11:52', unread:'4'},
-    ];
+    // const data = [
+    //   {key:0, title:'Rizwan', msg:'Hello how are you', time:'11:52', unread:'4'},
+    //   {key:1, title:'Ali', msg:'Hello how are you', time:'11:52', unread:'4'},
+    //   {key:2, title:'Areeb', msg:'Hello how are you', time:'11:52', unread:'4'},
+    // ];
 
     const sectionData = [
       {key:'0', title:'Pakistan', data:[{key:0, title:'Lahore'},{key:1, title:'Karachi'}]},
@@ -115,7 +122,18 @@ export default function Register({navigation, route}) {
     ];
 
   useEffect(()=>{
-    
+
+    const db = getDatabase(app)
+    const dbRef = ref(db, 'universities');
+        onValue(dbRef, (snapshot) => {
+          let data = snapshot.val();
+          setData(data);
+          console.log('universities are ==',data)
+      });
+  
+
+
+
     const unsubscribe = navigation.addListener('focus', ()=>{
       console.log('We are Back')
       // console.log(global.font);
@@ -124,13 +142,16 @@ export default function Register({navigation, route}) {
 
 
     return unsubscribe;
-  },[navigation])
+  },[])
 
   useEffect(()=>{
-    console.log('useEffect');
-
-    console.log(global.font)
-
+    console.log('Register useEffect');
+    // console.log(global.font)
+    var arr = ['a','b'];
+    var anotherarray = arr;
+    arr = [];
+    console.log('Now array is =',anotherarray);
+    console.log('Now array length is =',anotherarray);
   })
 
   useEffect(()=>{
@@ -225,14 +246,18 @@ export default function Register({navigation, route}) {
               
               <View style={{flex:0.50, backgroundColor:'grey'}}>
 
-              <Text style={{color:'white'}}> {item.title} </Text>
-              <Text style={{color:'white'}}> {item.msg} </Text>
+              <Text style={{fontSize:24,color:'white'}}> {item.title} </Text>
+              <Text style={{fontSize:24,color:'white'}}> {item.admission} </Text>
 
               </View>
               <View style={{flex:0.50, backgroundColor:'green', alignItems:'flex-end'}}>
 
-              <Text style={{color:'white'}}> {item.time} </Text>
-              <Text style={{color:'white'}}> {item.unread} </Text>
+              {/* <Text style={{color:'white'}}> {item.time} </Text> */}
+              {/* <Text style={{color:'white'}}> {item.unread} </Text> */}
+              
+              <Image style={{width:80, height:80, marginBottom:3}} source={{uri:item.logo}} />
+
+              
               </View>
 
 
